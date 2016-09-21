@@ -1,4 +1,6 @@
-package com.spon.utils;
+package com.spon.utils.compress;
+
+import com.spon.utils.CloseUtil;
 
 import java.io.*;
 import java.util.zip.Deflater;

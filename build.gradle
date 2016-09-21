@@ -32,7 +32,7 @@ dependencies {
 */
 
 subprojects {
-
+    //要有这个插件说明，不然会在执行构建的时候报没有compile或者testCompile方法什么的错误，我还不知道原因
     apply plugin: 'java'
 
     //JVM版本号要求
@@ -45,7 +45,7 @@ subprojects {
     repositories {
         mavenCentral()
         jcenter()
-        maven { url "http://mirrors.ibiblio.org/pub/mirrors/maven2" }
+       /* maven { url "http://mirrors.ibiblio.org/pub/mirrors/maven2" }
         maven { url "http://developer.ja-sig.org/maven2" }
         maven { url "http://maven.oschina.net/content/groups/public/" }
         maven { url "http://repository.jboss.org/nexus/content/groups/public-jboss/" }
@@ -55,7 +55,7 @@ subprojects {
         maven { url "http://coova-dev.s3.amazonaws.com/mvn" }
         maven { url "http://repository.jboss.org/nexus/content/repositories/deprecated" }
         maven { url "http://files.couchbase.com/maven2" }
-        maven { url "http://maven.restlet.org" }
+        maven { url "http://maven.restlet.org" }*/
     }
 
     //通用依赖
