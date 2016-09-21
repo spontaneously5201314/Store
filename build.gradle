@@ -76,6 +76,7 @@ subprojects {
                 'org.springframework:spring-webmvc:4.2.0.RELEASE',
                 'org.mybatis:mybatis:3.3.0',
                 'jstl:jstl:1.2',
+                'taglibs:standard:1.1.2',
                 'cglib:cglib:2.2.2',
                 'commons-logging:commons-logging:1.2',
                 'org.javassist:javassist:3.17.1-GA',
@@ -89,7 +90,24 @@ subprojects {
                 'commons-pool:commons-pool:1.6',
                 'org.mybatis:mybatis-spring:1.3.0',
                 'asm:asm:3.3.1',
-                'org.aspectj:aspectjweaver:1.8.9'
+                'org.aspectj:aspectjweaver:1.8.9',
+                'com.fasterxml.jackson.core:jackson-databind:2.4.2',
+                'org.freemarker:freemarker:2.3.18',
+                'com.alibaba:druid:1.0.9',
+                'commons-collections:commons-collections:1.0',
+                'commons-fileupload:commons-fileupload:1.2.2',
+                'org.apache.commons:commons-lang3:3.1',
+                'commons-codec:commons-codec:1.6',
+                'dom4j:dom4j:1.6.1',
+                'org.apache.tomcat:tomcat-jsp-api:7.0.47',
+                'org.slf4j:slf4j-log4j12:1.6.6',
+                'log4j:log4j:1.2.17',
+                'org.slf4j:slf4j-api:1.6.6',
+                'javax.activation:activation:1.1.1',
+                'org.json:json:20131018',
+                'redis.clients:jedis:2.6.2',
+                'org.jboss.netty:netty:3.2.5.Final',
+                'org.codehaus.mojo:tomcat-maven-plugin:1.1'
         )
 
         testCompile(
