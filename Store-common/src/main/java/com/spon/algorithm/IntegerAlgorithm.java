@@ -21,8 +21,4 @@ public final class IntegerAlgorithm {
         return res;
     }
 
-    public static void main(String[] args) {
-        int[] arr={3,3,1,2,4,2,5,5,4};
-        System.out.println(getOnlyOnceNumByXOR(arr));
-    }
 }

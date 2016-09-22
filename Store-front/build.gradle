@@ -9,6 +9,10 @@
 
 // Apply the java plugin to add support for Java
 apply plugin: 'war'
+//apply plugin: 'jetty'
+//httpPort = 9876
+//[jettyRun, jettyRunWar, jettyStop]*.stopPort = 9966
+//[jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stopKey'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -17,7 +21,6 @@ repositories {
     jcenter()
 }
 
-// In this section you declare the dependencies for your production and test code
 dependencies {
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.21'
@@ -28,4 +31,5 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
+
 }

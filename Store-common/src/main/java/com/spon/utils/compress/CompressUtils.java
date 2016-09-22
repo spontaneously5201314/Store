@@ -104,37 +104,6 @@ public final class CompressUtils {
         return bos == null ? null : bos.toByteArray();
     }
 
-    public static void main(String[] args) {
-        BufferedReader reader = null;
-        StringBuilder sb = new StringBuilder();
-        try {
-            reader = new BufferedReader(new FileReader("e:/sftp/7x190openid.sql"));
-            String line = reader.readLine();
-            while (line != null) {
-                sb.append(line);
-                line = reader.readLine();
-            }
-            System.out.println("长度：" + sb.length());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        long time = System.currentTimeMillis();
-        // byte [] out = CompressUtils.serializeAndCompress(sb.toString());
-        // System.out.println("len"+out.length);
-        byte[] in = sb.toString().getBytes();
-        CompressUtils.compressTest(in, 0, in.length);
-        System.out.println("time=" + (System.currentTimeMillis() - time));
-        System.out.println("===");
-
-    }
-
     public static void compressTest(byte[] inputs, int offset, int byteLen) {
 
         ByteArrayOutputStream bs = new ByteArrayOutputStream();

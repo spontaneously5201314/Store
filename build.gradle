@@ -107,7 +107,8 @@ subprojects {
                 'org.json:json:20131018',
                 'redis.clients:jedis:2.6.2',
                 'org.jboss.netty:netty:3.2.5.Final',
-                'org.codehaus.mojo:tomcat-maven-plugin:1.1'
+                'org.codehaus.mojo:tomcat-maven-plugin:1.1',
+                'commons-configuration:commons-configuration:1.6'
         )
 
         testCompile(
