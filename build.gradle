@@ -76,7 +76,6 @@ subprojects {
                 'org.springframework:spring-webmvc:4.2.0.RELEASE',
                 'org.mybatis:mybatis:3.3.0',
                 'jstl:jstl:1.2',
-                'taglibs:standard:1.1.2',
                 'cglib:cglib:2.2.2',
                 'commons-logging:commons-logging:1.2',
                 'org.javassist:javassist:3.17.1-GA',
@@ -99,7 +98,6 @@ subprojects {
                 'org.apache.commons:commons-lang3:3.1',
                 'commons-codec:commons-codec:1.6',
                 'dom4j:dom4j:1.6.1',
-                'org.apache.tomcat:tomcat-jsp-api:7.0.47',
                 'org.slf4j:slf4j-log4j12:1.6.6',
                 'log4j:log4j:1.2.17',
                 'org.slf4j:slf4j-api:1.6.6',
@@ -107,7 +105,6 @@ subprojects {
                 'org.json:json:20131018',
                 'redis.clients:jedis:2.6.2',
                 'org.jboss.netty:netty:3.2.5.Final',
-                'org.codehaus.mojo:tomcat-maven-plugin:1.1',
                 'commons-configuration:commons-configuration:1.6'
         )
 
@@ -115,4 +112,5 @@ subprojects {
                 'junit:junit:4.12'
         )
     }
+
 }
