@@ -74,7 +74,7 @@ subprojects {
                 'org.springframework:spring-tx:4.2.0.RELEASE',
                 'org.springframework:spring-web:4.2.0.RELEASE',
                 'org.springframework:spring-webmvc:4.2.0.RELEASE',
-                'org.mybatis:mybatis:3.3.0',
+                'org.mybatis:mybatis:3.4.0',
                 'jstl:jstl:1.2',
                 'cglib:cglib:2.2.2',
                 'commons-logging:commons-logging:1.2',
@@ -105,7 +105,9 @@ subprojects {
                 'org.json:json:20131018',
                 'redis.clients:jedis:2.6.2',
                 'org.jboss.netty:netty:3.2.5.Final',
-                'commons-configuration:commons-configuration:1.6'
+                'commons-configuration:commons-configuration:1.6',
+                'net.sf.ehcache:ehcache-core:2.6.5',
+                'com.googlecode.ehcache-spring-annotations:ehcache-spring-annotations:1.2.0'
         )
 
         testCompile(

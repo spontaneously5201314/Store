@@ -1,4 +1,4 @@
-package com.spon.login.dao;
+package com.spon.mapper;
 
 import com.spon.pojo.User;
 
