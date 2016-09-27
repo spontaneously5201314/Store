@@ -35,7 +35,7 @@
 跳转：<input id="toPage" type="button" onclick="toPage()"/>
 <form id="users">
 </form>--%>
-<form id="login" action="${pageContext.request.contextPath}/login/listUsers.html" method="post">
+<form id="login" action="${pageContext.request.contextPath}/login/listUsers.action" method="post">
     <table id="usermessage" border="1">
         <tr>
             <td>用户名：</td>
