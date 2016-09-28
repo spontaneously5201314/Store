@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="bbs_buyer" >
+  <resultMap id="BaseResultMap" class="com.spon.domain.Buyer" >
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="town" property="town" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    username, password, gender, email, real_name, register_time, province, city, town, 
+    addr, is_del
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="com.spon.domain.BuyerExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="bbs_buyer.Base_Column_List" />
+    from bbs_buyer
+    <isParameterPresent >
+      <include refid="bbs_buyer.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="com.spon.domain.Buyer" >
+    select 
+    <include refid="bbs_buyer.Base_Column_List" />
+    from bbs_buyer
+    where username = #username:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.spon.domain.Buyer" >
+    delete from bbs_buyer
+    where username = #username:VARCHAR#
+  </delete>
+  <delete id="deleteByExample" parameterClass="com.spon.domain.BuyerExample" >
+    delete from bbs_buyer
+    <include refid="bbs_buyer.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="com.spon.domain.Buyer" >
+    insert into bbs_buyer (username, password, gender, email, 
+      real_name, register_time, province, city, 
+      town, addr, is_del)
+    values (#username:VARCHAR#, #password:VARCHAR#, #gender:INTEGER#, #email:VARCHAR#, 
+      #realName:VARCHAR#, #registerTime:TIMESTAMP#, #province:VARCHAR#, #city:VARCHAR#, 
+      #town:VARCHAR#, #addr:VARCHAR#, #isDel:BIT#)
+  </insert>
+  <insert id="insertSelective" parameterClass="com.spon.domain.Buyer" >
+    insert into bbs_buyer
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="username" >
+        username
+      </isNotNull>
+      <isNotNull prepend="," property="password" >
+        password
+      </isNotNull>
+      <isNotNull prepend="," property="gender" >
+        gender
+      </isNotNull>
+      <isNotNull prepend="," property="email" >
+        email
+      </isNotNull>
+      <isNotNull prepend="," property="realName" >
+        real_name
+      </isNotNull>
+      <isNotNull prepend="," property="registerTime" >
+        register_time
+      </isNotNull>
+      <isNotNull prepend="," property="province" >
+        province
+      </isNotNull>
+      <isNotNull prepend="," property="city" >
+        city
+      </isNotNull>
+      <isNotNull prepend="," property="town" >
+        town
+      </isNotNull>
+      <isNotNull prepend="," property="addr" >
+        addr
+      </isNotNull>
+      <isNotNull prepend="," property="isDel" >
+        is_del
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="username" >
+        #username:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="password" >
+        #password:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="gender" >
+        #gender:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="email" >
+        #email:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="realName" >
+        #realName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="registerTime" >
+        #registerTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="province" >
+        #province:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="city" >
+        #city:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="town" >
+        #town:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="addr" >
+        #addr:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="isDel" >
+        #isDel:BIT#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="com.spon.domain.BuyerExample" resultClass="java.lang.Integer" >
+    select count(*) from bbs_buyer
+    <include refid="bbs_buyer.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update bbs_buyer
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.username" >
+        username = #record.username:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.password" >
+        password = #record.password:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.gender" >
+        gender = #record.gender:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.email" >
+        email = #record.email:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.realName" >
+        real_name = #record.realName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.registerTime" >
+        register_time = #record.registerTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.province" >
+        province = #record.province:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.city" >
+        city = #record.city:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.town" >
+        town = #record.town:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.addr" >
+        addr = #record.addr:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.isDel" >
+        is_del = #record.isDel:BIT#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="bbs_buyer.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update bbs_buyer
+    set username = #record.username:VARCHAR#,
+      password = #record.password:VARCHAR#,
+      gender = #record.gender:INTEGER#,
+      email = #record.email:VARCHAR#,
+      real_name = #record.realName:VARCHAR#,
+      register_time = #record.registerTime:TIMESTAMP#,
+      province = #record.province:VARCHAR#,
+      city = #record.city:VARCHAR#,
+      town = #record.town:VARCHAR#,
+      addr = #record.addr:VARCHAR#,
+      is_del = #record.isDel:BIT#
+    <isParameterPresent >
+      <include refid="bbs_buyer.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.spon.domain.Buyer" >
+    update bbs_buyer
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="password" >
+        password = #password:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="gender" >
+        gender = #gender:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="email" >
+        email = #email:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="realName" >
+        real_name = #realName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="registerTime" >
+        register_time = #registerTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="province" >
+        province = #province:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="city" >
+        city = #city:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="town" >
+        town = #town:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="addr" >
+        addr = #addr:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="isDel" >
+        is_del = #isDel:BIT#
+      </isNotNull>
+    </dynamic>
+    where username = #username:VARCHAR#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="com.spon.domain.Buyer" >
+    update bbs_buyer
+    set password = #password:VARCHAR#,
+      gender = #gender:INTEGER#,
+      email = #email:VARCHAR#,
+      real_name = #realName:VARCHAR#,
+      register_time = #registerTime:TIMESTAMP#,
+      province = #province:VARCHAR#,
+      city = #city:VARCHAR#,
+      town = #town:VARCHAR#,
+      addr = #addr:VARCHAR#,
+      is_del = #isDel:BIT#
+    where username = #username:VARCHAR#
+  </update>
+</sqlMap>

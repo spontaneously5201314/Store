@@ -5,6 +5,6 @@
 <configuration>
     <!--别名-->
     <typeAliases>
-        <package name="com.spon"/>
+        <package name="com.spon.domain"/>
     </typeAliases>
 </configuration>

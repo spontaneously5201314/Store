@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="bbs_product" >
+  <resultMap id="BaseResultMap" class="com.spon.domain.Product" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="brand_id" property="brandId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="REAL" />
+    <result column="is_new" property="isNew" jdbcType="BIT" />
+    <result column="is_hot" property="isHot" jdbcType="BIT" />
+    <result column="is_commend" property="isCommend" jdbcType="BIT" />
+    <result column="is_show" property="isShow" jdbcType="BIT" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+    <result column="sales" property="sales" jdbcType="INTEGER" />
+    <result column="features" property="features" jdbcType="VARCHAR" />
+    <result column="colors" property="colors" jdbcType="VARCHAR" />
+    <result column="sizes" property="sizes" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="check_time" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="check_user_id" property="checkUserId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" class="com.spon.domain.ProductWithBLOBs" extends="bbs_product.BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="package_list" property="packageList" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type_id, brand_id, name, weight, is_new, is_hot, is_commend, is_show, is_del, 
+    sales, features, colors, sizes, create_time, check_time, create_user_id, check_user_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    description, package_list
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterClass="com.spon.domain.ProductExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="bbs_product.Base_Column_List" />
+    ,
+    <include refid="bbs_product.Blob_Column_List" />
+    from bbs_product
+    <isParameterPresent >
+      <include refid="bbs_product.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="com.spon.domain.ProductExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="bbs_product.Base_Column_List" />
+    from bbs_product
+    <isParameterPresent >
+      <include refid="bbs_product.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterClass="com.spon.domain.Product" >
+    select 
+    <include refid="bbs_product.Base_Column_List" />
+    ,
+    <include refid="bbs_product.Blob_Column_List" />
+    from bbs_product
+    where id = #id:BIGINT#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.spon.domain.Product" >
+    delete from bbs_product
+    where id = #id:BIGINT#
+  </delete>
+  <delete id="deleteByExample" parameterClass="com.spon.domain.ProductExample" >
+    delete from bbs_product
+    <include refid="bbs_product.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="com.spon.domain.ProductWithBLOBs" >
+    insert into bbs_product (id, type_id, brand_id, name, weight, 
+      is_new, is_hot, is_commend, is_show, is_del, sales, 
+      features, colors, sizes, create_time, 
+      check_time, create_user_id, check_user_id, description, 
+      package_list)
+    values (#id:BIGINT#, #typeId:BIGINT#, #brandId:BIGINT#, #name:VARCHAR#, #weight:REAL#, 
+      #isNew:BIT#, #isHot:BIT#, #isCommend:BIT#, #isShow:BIT#, #isDel:BIT#, #sales:INTEGER#, 
+      #features:VARCHAR#, #colors:VARCHAR#, #sizes:VARCHAR#, #createTime:TIMESTAMP#, 
+      #checkTime:TIMESTAMP#, #createUserId:VARCHAR#, #checkUserId:VARCHAR#, #description:LONGVARCHAR#, 
+      #packageList:LONGVARCHAR#)
+  </insert>
+  <insert id="insertSelective" parameterClass="com.spon.domain.ProductWithBLOBs" >
+    insert into bbs_product
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="id" >
+        id
+      </isNotNull>
+      <isNotNull prepend="," property="typeId" >
+        type_id
+      </isNotNull>
+      <isNotNull prepend="," property="brandId" >
+        brand_id
+      </isNotNull>
+      <isNotNull prepend="," property="name" >
+        name
+      </isNotNull>
+      <isNotNull prepend="," property="weight" >
+        weight
+      </isNotNull>
+      <isNotNull prepend="," property="isNew" >
+        is_new
+      </isNotNull>
+      <isNotNull prepend="," property="isHot" >
+        is_hot
+      </isNotNull>
+      <isNotNull prepend="," property="isCommend" >
+        is_commend
+      </isNotNull>
+      <isNotNull prepend="," property="isShow" >
+        is_show
+      </isNotNull>
+      <isNotNull prepend="," property="isDel" >
+        is_del
+      </isNotNull>
+      <isNotNull prepend="," property="sales" >
+        sales
+      </isNotNull>
+      <isNotNull prepend="," property="features" >
+        features
+      </isNotNull>
+      <isNotNull prepend="," property="colors" >
+        colors
+      </isNotNull>
+      <isNotNull prepend="," property="sizes" >
+        sizes
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        create_time
+      </isNotNull>
+      <isNotNull prepend="," property="checkTime" >
+        check_time
+      </isNotNull>
+      <isNotNull prepend="," property="createUserId" >
+        create_user_id
+      </isNotNull>
+      <isNotNull prepend="," property="checkUserId" >
+        check_user_id
+      </isNotNull>
+      <isNotNull prepend="," property="description" >
+        description
+      </isNotNull>
+      <isNotNull prepend="," property="packageList" >
+        package_list
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="id" >
+        #id:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="typeId" >
+        #typeId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="brandId" >
+        #brandId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="name" >
+        #name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="weight" >
+        #weight:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="isNew" >
+        #isNew:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="isHot" >
+        #isHot:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="isCommend" >
+        #isCommend:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="isShow" >
+        #isShow:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="isDel" >
+        #isDel:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="sales" >
+        #sales:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="features" >
+        #features:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="colors" >
+        #colors:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sizes" >
+        #sizes:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="checkTime" >
+        #checkTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="createUserId" >
+        #createUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checkUserId" >
+        #checkUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="description" >
+        #description:LONGVARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="packageList" >
+        #packageList:LONGVARCHAR#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="com.spon.domain.ProductExample" resultClass="java.lang.Integer" >
+    select count(*) from bbs_product
+    <include refid="bbs_product.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update bbs_product
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.id" >
+        id = #record.id:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.typeId" >
+        type_id = #record.typeId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.brandId" >
+        brand_id = #record.brandId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.name" >
+        name = #record.name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.weight" >
+        weight = #record.weight:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="record.isNew" >
+        is_new = #record.isNew:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.isHot" >
+        is_hot = #record.isHot:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.isCommend" >
+        is_commend = #record.isCommend:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.isShow" >
+        is_show = #record.isShow:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.isDel" >
+        is_del = #record.isDel:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.sales" >
+        sales = #record.sales:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.features" >
+        features = #record.features:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.colors" >
+        colors = #record.colors:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.sizes" >
+        sizes = #record.sizes:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.createTime" >
+        create_time = #record.createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.checkTime" >
+        check_time = #record.checkTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.createUserId" >
+        create_user_id = #record.createUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.checkUserId" >
+        check_user_id = #record.checkUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.description" >
+        description = #record.description:LONGVARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.packageList" >
+        package_list = #record.packageList:LONGVARCHAR#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="bbs_product.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExampleWithBLOBs" >
+    update bbs_product
+    set id = #record.id:BIGINT#,
+      type_id = #record.typeId:BIGINT#,
+      brand_id = #record.brandId:BIGINT#,
+      name = #record.name:VARCHAR#,
+      weight = #record.weight:REAL#,
+      is_new = #record.isNew:BIT#,
+      is_hot = #record.isHot:BIT#,
+      is_commend = #record.isCommend:BIT#,
+      is_show = #record.isShow:BIT#,
+      is_del = #record.isDel:BIT#,
+      sales = #record.sales:INTEGER#,
+      features = #record.features:VARCHAR#,
+      colors = #record.colors:VARCHAR#,
+      sizes = #record.sizes:VARCHAR#,
+      create_time = #record.createTime:TIMESTAMP#,
+      check_time = #record.checkTime:TIMESTAMP#,
+      create_user_id = #record.createUserId:VARCHAR#,
+      check_user_id = #record.checkUserId:VARCHAR#,
+      description = #record.description:LONGVARCHAR#,
+      package_list = #record.packageList:LONGVARCHAR#
+    <isParameterPresent >
+      <include refid="bbs_product.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update bbs_product
+    set id = #record.id:BIGINT#,
+      type_id = #record.typeId:BIGINT#,
+      brand_id = #record.brandId:BIGINT#,
+      name = #record.name:VARCHAR#,
+      weight = #record.weight:REAL#,
+      is_new = #record.isNew:BIT#,
+      is_hot = #record.isHot:BIT#,
+      is_commend = #record.isCommend:BIT#,
+      is_show = #record.isShow:BIT#,
+      is_del = #record.isDel:BIT#,
+      sales = #record.sales:INTEGER#,
+      features = #record.features:VARCHAR#,
+      colors = #record.colors:VARCHAR#,
+      sizes = #record.sizes:VARCHAR#,
+      create_time = #record.createTime:TIMESTAMP#,
+      check_time = #record.checkTime:TIMESTAMP#,
+      create_user_id = #record.createUserId:VARCHAR#,
+      check_user_id = #record.checkUserId:VARCHAR#
+    <isParameterPresent >
+      <include refid="bbs_product.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.spon.domain.ProductWithBLOBs" >
+    update bbs_product
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="typeId" >
+        type_id = #typeId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="brandId" >
+        brand_id = #brandId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="name" >
+        name = #name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="weight" >
+        weight = #weight:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="isNew" >
+        is_new = #isNew:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="isHot" >
+        is_hot = #isHot:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="isCommend" >
+        is_commend = #isCommend:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="isShow" >
+        is_show = #isShow:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="isDel" >
+        is_del = #isDel:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="sales" >
+        sales = #sales:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="features" >
+        features = #features:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="colors" >
+        colors = #colors:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sizes" >
+        sizes = #sizes:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        create_time = #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="checkTime" >
+        check_time = #checkTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="createUserId" >
+        create_user_id = #createUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="checkUserId" >
+        check_user_id = #checkUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="description" >
+        description = #description:LONGVARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="packageList" >
+        package_list = #packageList:LONGVARCHAR#
+      </isNotNull>
+    </dynamic>
+    where id = #id:BIGINT#
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterClass="com.spon.domain.ProductWithBLOBs" >
+    update bbs_product
+    set type_id = #typeId:BIGINT#,
+      brand_id = #brandId:BIGINT#,
+      name = #name:VARCHAR#,
+      weight = #weight:REAL#,
+      is_new = #isNew:BIT#,
+      is_hot = #isHot:BIT#,
+      is_commend = #isCommend:BIT#,
+      is_show = #isShow:BIT#,
+      is_del = #isDel:BIT#,
+      sales = #sales:INTEGER#,
+      features = #features:VARCHAR#,
+      colors = #colors:VARCHAR#,
+      sizes = #sizes:VARCHAR#,
+      create_time = #createTime:TIMESTAMP#,
+      check_time = #checkTime:TIMESTAMP#,
+      create_user_id = #createUserId:VARCHAR#,
+      check_user_id = #checkUserId:VARCHAR#,
+      description = #description:LONGVARCHAR#,
+      package_list = #packageList:LONGVARCHAR#
+    where id = #id:BIGINT#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="com.spon.domain.Product" >
+    update bbs_product
+    set type_id = #typeId:BIGINT#,
+      brand_id = #brandId:BIGINT#,
+      name = #name:VARCHAR#,
+      weight = #weight:REAL#,
+      is_new = #isNew:BIT#,
+      is_hot = #isHot:BIT#,
+      is_commend = #isCommend:BIT#,
+      is_show = #isShow:BIT#,
+      is_del = #isDel:BIT#,
+      sales = #sales:INTEGER#,
+      features = #features:VARCHAR#,
+      colors = #colors:VARCHAR#,
+      sizes = #sizes:VARCHAR#,
+      create_time = #createTime:TIMESTAMP#,
+      check_time = #checkTime:TIMESTAMP#,
+      create_user_id = #createUserId:VARCHAR#,
+      check_user_id = #checkUserId:VARCHAR#
+    where id = #id:BIGINT#
+  </update>
+</sqlMap>

@@ -27,15 +27,24 @@
             });
         });
     </script>--%>
+    <script>
+        window.onload = function{
+            function toLogin(){
+                window.Location.href = "${basePath}/WEB-INF/jsp/login.jsp";
+            }
+        }
+    </script>
 </head>
 <body>
+
+跳转：<a href="WEB-INF/jsp/login.jsp" name="跳转">跳转</a>
 <%--<form>
     查看用户：<input id="listUsers" type="button" onclick="listUsers()" value="查看用户"/>
 </form>
 跳转：<input id="toPage" type="button" onclick="toPage()"/>
 <form id="users">
 </form>--%>
-<form id="login" action="${pageContext.request.contextPath}/login/listUsers.action" method="post">
+<form id="login" action="${pageContext.request.contextPath}/login/listUsers.do" method="post">
     <table id="usermessage" border="1">
         <tr>
             <td>用户名：</td>

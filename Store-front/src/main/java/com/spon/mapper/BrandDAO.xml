@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="bbs_brand" >
+  <resultMap id="BaseResultMap" class="com.spon.domain.Brand" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="web_site" property="webSite" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="is_display" property="isDisplay" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, description, img_url, web_site, sort, is_display
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="com.spon.domain.BrandExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="bbs_brand.Base_Column_List" />
+    from bbs_brand
+    <isParameterPresent >
+      <include refid="bbs_brand.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="com.spon.domain.Brand" >
+    select 
+    <include refid="bbs_brand.Base_Column_List" />
+    from bbs_brand
+    where id = #id:BIGINT#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.spon.domain.Brand" >
+    delete from bbs_brand
+    where id = #id:BIGINT#
+  </delete>
+  <delete id="deleteByExample" parameterClass="com.spon.domain.BrandExample" >
+    delete from bbs_brand
+    <include refid="bbs_brand.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="com.spon.domain.Brand" >
+    insert into bbs_brand (id, name, description, img_url, web_site, 
+      sort, is_display)
+    values (#id:BIGINT#, #name:VARCHAR#, #description:VARCHAR#, #imgUrl:VARCHAR#, #webSite:VARCHAR#, 
+      #sort:INTEGER#, #isDisplay:BIT#)
+  </insert>
+  <insert id="insertSelective" parameterClass="com.spon.domain.Brand" >
+    insert into bbs_brand
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="id" >
+        id
+      </isNotNull>
+      <isNotNull prepend="," property="name" >
+        name
+      </isNotNull>
+      <isNotNull prepend="," property="description" >
+        description
+      </isNotNull>
+      <isNotNull prepend="," property="imgUrl" >
+        img_url
+      </isNotNull>
+      <isNotNull prepend="," property="webSite" >
+        web_site
+      </isNotNull>
+      <isNotNull prepend="," property="sort" >
+        sort
+      </isNotNull>
+      <isNotNull prepend="," property="isDisplay" >
+        is_display
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="id" >
+        #id:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="name" >
+        #name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="description" >
+        #description:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="imgUrl" >
+        #imgUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="webSite" >
+        #webSite:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sort" >
+        #sort:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="isDisplay" >
+        #isDisplay:BIT#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="com.spon.domain.BrandExample" resultClass="java.lang.Integer" >
+    select count(*) from bbs_brand
+    <include refid="bbs_brand.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update bbs_brand
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.id" >
+        id = #record.id:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.name" >
+        name = #record.name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.description" >
+        description = #record.description:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.imgUrl" >
+        img_url = #record.imgUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.webSite" >
+        web_site = #record.webSite:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.sort" >
+        sort = #record.sort:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.isDisplay" >
+        is_display = #record.isDisplay:BIT#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="bbs_brand.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update bbs_brand
+    set id = #record.id:BIGINT#,
+      name = #record.name:VARCHAR#,
+      description = #record.description:VARCHAR#,
+      img_url = #record.imgUrl:VARCHAR#,
+      web_site = #record.webSite:VARCHAR#,
+      sort = #record.sort:INTEGER#,
+      is_display = #record.isDisplay:BIT#
+    <isParameterPresent >
+      <include refid="bbs_brand.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.spon.domain.Brand" >
+    update bbs_brand
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="name" >
+        name = #name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="description" >
+        description = #description:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="imgUrl" >
+        img_url = #imgUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="webSite" >
+        web_site = #webSite:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sort" >
+        sort = #sort:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="isDisplay" >
+        is_display = #isDisplay:BIT#
+      </isNotNull>
+    </dynamic>
+    where id = #id:BIGINT#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="com.spon.domain.Brand" >
+    update bbs_brand
+    set name = #name:VARCHAR#,
+      description = #description:VARCHAR#,
+      img_url = #imgUrl:VARCHAR#,
+      web_site = #webSite:VARCHAR#,
+      sort = #sort:INTEGER#,
+      is_display = #isDisplay:BIT#
+    where id = #id:BIGINT#
+  </update>
+</sqlMap>

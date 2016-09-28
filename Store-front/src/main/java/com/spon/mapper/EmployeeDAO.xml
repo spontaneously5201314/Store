@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="bbs_employee" >
+  <resultMap id="BaseResultMap" class="com.spon.domain.Employee" >
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    username, password, degree, email, gender, img_url, phone, real_name, school, is_del
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="com.spon.domain.EmployeeExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="bbs_employee.Base_Column_List" />
+    from bbs_employee
+    <isParameterPresent >
+      <include refid="bbs_employee.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="com.spon.domain.Employee" >
+    select 
+    <include refid="bbs_employee.Base_Column_List" />
+    from bbs_employee
+    where username = #username:VARCHAR#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.spon.domain.Employee" >
+    delete from bbs_employee
+    where username = #username:VARCHAR#
+  </delete>
+  <delete id="deleteByExample" parameterClass="com.spon.domain.EmployeeExample" >
+    delete from bbs_employee
+    <include refid="bbs_employee.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="com.spon.domain.Employee" >
+    insert into bbs_employee (username, password, degree, email, 
+      gender, img_url, phone, real_name, school, 
+      is_del)
+    values (#username:VARCHAR#, #password:VARCHAR#, #degree:VARCHAR#, #email:VARCHAR#, 
+      #gender:INTEGER#, #imgUrl:VARCHAR#, #phone:VARCHAR#, #realName:VARCHAR#, #school:VARCHAR#, 
+      #isDel:BIT#)
+  </insert>
+  <insert id="insertSelective" parameterClass="com.spon.domain.Employee" >
+    insert into bbs_employee
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="username" >
+        username
+      </isNotNull>
+      <isNotNull prepend="," property="password" >
+        password
+      </isNotNull>
+      <isNotNull prepend="," property="degree" >
+        degree
+      </isNotNull>
+      <isNotNull prepend="," property="email" >
+        email
+      </isNotNull>
+      <isNotNull prepend="," property="gender" >
+        gender
+      </isNotNull>
+      <isNotNull prepend="," property="imgUrl" >
+        img_url
+      </isNotNull>
+      <isNotNull prepend="," property="phone" >
+        phone
+      </isNotNull>
+      <isNotNull prepend="," property="realName" >
+        real_name
+      </isNotNull>
+      <isNotNull prepend="," property="school" >
+        school
+      </isNotNull>
+      <isNotNull prepend="," property="isDel" >
+        is_del
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="username" >
+        #username:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="password" >
+        #password:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="degree" >
+        #degree:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="email" >
+        #email:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="gender" >
+        #gender:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="imgUrl" >
+        #imgUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="phone" >
+        #phone:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="realName" >
+        #realName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="school" >
+        #school:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="isDel" >
+        #isDel:BIT#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="com.spon.domain.EmployeeExample" resultClass="java.lang.Integer" >
+    select count(*) from bbs_employee
+    <include refid="bbs_employee.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update bbs_employee
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.username" >
+        username = #record.username:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.password" >
+        password = #record.password:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.degree" >
+        degree = #record.degree:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.email" >
+        email = #record.email:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.gender" >
+        gender = #record.gender:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.imgUrl" >
+        img_url = #record.imgUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.phone" >
+        phone = #record.phone:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.realName" >
+        real_name = #record.realName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.school" >
+        school = #record.school:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.isDel" >
+        is_del = #record.isDel:BIT#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="bbs_employee.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update bbs_employee
+    set username = #record.username:VARCHAR#,
+      password = #record.password:VARCHAR#,
+      degree = #record.degree:VARCHAR#,
+      email = #record.email:VARCHAR#,
+      gender = #record.gender:INTEGER#,
+      img_url = #record.imgUrl:VARCHAR#,
+      phone = #record.phone:VARCHAR#,
+      real_name = #record.realName:VARCHAR#,
+      school = #record.school:VARCHAR#,
+      is_del = #record.isDel:BIT#
+    <isParameterPresent >
+      <include refid="bbs_employee.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.spon.domain.Employee" >
+    update bbs_employee
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="password" >
+        password = #password:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="degree" >
+        degree = #degree:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="email" >
+        email = #email:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="gender" >
+        gender = #gender:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="imgUrl" >
+        img_url = #imgUrl:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="phone" >
+        phone = #phone:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="realName" >
+        real_name = #realName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="school" >
+        school = #school:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="isDel" >
+        is_del = #isDel:BIT#
+      </isNotNull>
+    </dynamic>
+    where username = #username:VARCHAR#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="com.spon.domain.Employee" >
+    update bbs_employee
+    set password = #password:VARCHAR#,
+      degree = #degree:VARCHAR#,
+      email = #email:VARCHAR#,
+      gender = #gender:INTEGER#,
+      img_url = #imgUrl:VARCHAR#,
+      phone = #phone:VARCHAR#,
+      real_name = #realName:VARCHAR#,
+      school = #school:VARCHAR#,
+      is_del = #isDel:BIT#
+    where username = #username:VARCHAR#
+  </update>
+</sqlMap>

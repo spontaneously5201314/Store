@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="bbs_sku" >
+  <resultMap id="BaseResultMap" class="com.spon.domain.Sku" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="color_id" property="colorId" jdbcType="BIGINT" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="delive_fee" property="deliveFee" jdbcType="REAL" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="upper_limit" property="upperLimit" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="sku_img" property="skuImg" jdbcType="VARCHAR" />
+    <result column="sku_sort" property="skuSort" jdbcType="INTEGER" />
+    <result column="sku_name" property="skuName" jdbcType="VARCHAR" />
+    <result column="market_price" property="marketPrice" jdbcType="REAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="sku_status" property="skuStatus" jdbcType="BIT" />
+    <result column="sku_type" property="skuType" jdbcType="BIT" />
+    <result column="sales" property="sales" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, product_id, color_id, size, delive_fee, price, stock, upper_limit, location, 
+    sku_img, sku_sort, sku_name, market_price, create_time, update_time, create_user_id, 
+    update_user_id, sku_status, sku_type, sales
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="com.spon.domain.SkuExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="bbs_sku.Base_Column_List" />
+    from bbs_sku
+    <isParameterPresent >
+      <include refid="bbs_sku.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="com.spon.domain.Sku" >
+    select 
+    <include refid="bbs_sku.Base_Column_List" />
+    from bbs_sku
+    where id = #id:BIGINT#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.spon.domain.Sku" >
+    delete from bbs_sku
+    where id = #id:BIGINT#
+  </delete>
+  <delete id="deleteByExample" parameterClass="com.spon.domain.SkuExample" >
+    delete from bbs_sku
+    <include refid="bbs_sku.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="com.spon.domain.Sku" >
+    insert into bbs_sku (id, product_id, color_id, size, delive_fee, 
+      price, stock, upper_limit, location, sku_img, 
+      sku_sort, sku_name, market_price, create_time, 
+      update_time, create_user_id, update_user_id, sku_status, 
+      sku_type, sales)
+    values (#id:BIGINT#, #productId:BIGINT#, #colorId:BIGINT#, #size:VARCHAR#, #deliveFee:REAL#, 
+      #price:REAL#, #stock:INTEGER#, #upperLimit:INTEGER#, #location:VARCHAR#, #skuImg:VARCHAR#, 
+      #skuSort:INTEGER#, #skuName:VARCHAR#, #marketPrice:REAL#, #createTime:TIMESTAMP#, 
+      #updateTime:TIMESTAMP#, #createUserId:VARCHAR#, #updateUserId:VARCHAR#, #skuStatus:BIT#, 
+      #skuType:BIT#, #sales:BIGINT#)
+  </insert>
+  <insert id="insertSelective" parameterClass="com.spon.domain.Sku" >
+    insert into bbs_sku
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="id" >
+        id
+      </isNotNull>
+      <isNotNull prepend="," property="productId" >
+        product_id
+      </isNotNull>
+      <isNotNull prepend="," property="colorId" >
+        color_id
+      </isNotNull>
+      <isNotNull prepend="," property="size" >
+        size
+      </isNotNull>
+      <isNotNull prepend="," property="deliveFee" >
+        delive_fee
+      </isNotNull>
+      <isNotNull prepend="," property="price" >
+        price
+      </isNotNull>
+      <isNotNull prepend="," property="stock" >
+        stock
+      </isNotNull>
+      <isNotNull prepend="," property="upperLimit" >
+        upper_limit
+      </isNotNull>
+      <isNotNull prepend="," property="location" >
+        location
+      </isNotNull>
+      <isNotNull prepend="," property="skuImg" >
+        sku_img
+      </isNotNull>
+      <isNotNull prepend="," property="skuSort" >
+        sku_sort
+      </isNotNull>
+      <isNotNull prepend="," property="skuName" >
+        sku_name
+      </isNotNull>
+      <isNotNull prepend="," property="marketPrice" >
+        market_price
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        create_time
+      </isNotNull>
+      <isNotNull prepend="," property="updateTime" >
+        update_time
+      </isNotNull>
+      <isNotNull prepend="," property="createUserId" >
+        create_user_id
+      </isNotNull>
+      <isNotNull prepend="," property="updateUserId" >
+        update_user_id
+      </isNotNull>
+      <isNotNull prepend="," property="skuStatus" >
+        sku_status
+      </isNotNull>
+      <isNotNull prepend="," property="skuType" >
+        sku_type
+      </isNotNull>
+      <isNotNull prepend="," property="sales" >
+        sales
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="id" >
+        #id:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="productId" >
+        #productId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="colorId" >
+        #colorId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="size" >
+        #size:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="deliveFee" >
+        #deliveFee:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="price" >
+        #price:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="stock" >
+        #stock:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="upperLimit" >
+        #upperLimit:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="location" >
+        #location:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="skuImg" >
+        #skuImg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="skuSort" >
+        #skuSort:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="skuName" >
+        #skuName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="marketPrice" >
+        #marketPrice:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="updateTime" >
+        #updateTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="createUserId" >
+        #createUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="updateUserId" >
+        #updateUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="skuStatus" >
+        #skuStatus:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="skuType" >
+        #skuType:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="sales" >
+        #sales:BIGINT#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="com.spon.domain.SkuExample" resultClass="java.lang.Integer" >
+    select count(*) from bbs_sku
+    <include refid="bbs_sku.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update bbs_sku
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.id" >
+        id = #record.id:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.productId" >
+        product_id = #record.productId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.colorId" >
+        color_id = #record.colorId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.size" >
+        size = #record.size:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.deliveFee" >
+        delive_fee = #record.deliveFee:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="record.price" >
+        price = #record.price:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="record.stock" >
+        stock = #record.stock:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.upperLimit" >
+        upper_limit = #record.upperLimit:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.location" >
+        location = #record.location:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.skuImg" >
+        sku_img = #record.skuImg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.skuSort" >
+        sku_sort = #record.skuSort:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.skuName" >
+        sku_name = #record.skuName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.marketPrice" >
+        market_price = #record.marketPrice:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="record.createTime" >
+        create_time = #record.createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.updateTime" >
+        update_time = #record.updateTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.createUserId" >
+        create_user_id = #record.createUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.updateUserId" >
+        update_user_id = #record.updateUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.skuStatus" >
+        sku_status = #record.skuStatus:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.skuType" >
+        sku_type = #record.skuType:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.sales" >
+        sales = #record.sales:BIGINT#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="bbs_sku.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update bbs_sku
+    set id = #record.id:BIGINT#,
+      product_id = #record.productId:BIGINT#,
+      color_id = #record.colorId:BIGINT#,
+      size = #record.size:VARCHAR#,
+      delive_fee = #record.deliveFee:REAL#,
+      price = #record.price:REAL#,
+      stock = #record.stock:INTEGER#,
+      upper_limit = #record.upperLimit:INTEGER#,
+      location = #record.location:VARCHAR#,
+      sku_img = #record.skuImg:VARCHAR#,
+      sku_sort = #record.skuSort:INTEGER#,
+      sku_name = #record.skuName:VARCHAR#,
+      market_price = #record.marketPrice:REAL#,
+      create_time = #record.createTime:TIMESTAMP#,
+      update_time = #record.updateTime:TIMESTAMP#,
+      create_user_id = #record.createUserId:VARCHAR#,
+      update_user_id = #record.updateUserId:VARCHAR#,
+      sku_status = #record.skuStatus:BIT#,
+      sku_type = #record.skuType:BIT#,
+      sales = #record.sales:BIGINT#
+    <isParameterPresent >
+      <include refid="bbs_sku.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.spon.domain.Sku" >
+    update bbs_sku
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="productId" >
+        product_id = #productId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="colorId" >
+        color_id = #colorId:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="size" >
+        size = #size:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="deliveFee" >
+        delive_fee = #deliveFee:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="price" >
+        price = #price:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="stock" >
+        stock = #stock:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="upperLimit" >
+        upper_limit = #upperLimit:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="location" >
+        location = #location:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="skuImg" >
+        sku_img = #skuImg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="skuSort" >
+        sku_sort = #skuSort:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="skuName" >
+        sku_name = #skuName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="marketPrice" >
+        market_price = #marketPrice:REAL#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        create_time = #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="updateTime" >
+        update_time = #updateTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="createUserId" >
+        create_user_id = #createUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="updateUserId" >
+        update_user_id = #updateUserId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="skuStatus" >
+        sku_status = #skuStatus:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="skuType" >
+        sku_type = #skuType:BIT#
+      </isNotNull>
+      <isNotNull prepend="," property="sales" >
+        sales = #sales:BIGINT#
+      </isNotNull>
+    </dynamic>
+    where id = #id:BIGINT#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="com.spon.domain.Sku" >
+    update bbs_sku
+    set product_id = #productId:BIGINT#,
+      color_id = #colorId:BIGINT#,
+      size = #size:VARCHAR#,
+      delive_fee = #deliveFee:REAL#,
+      price = #price:REAL#,
+      stock = #stock:INTEGER#,
+      upper_limit = #upperLimit:INTEGER#,
+      location = #location:VARCHAR#,
+      sku_img = #skuImg:VARCHAR#,
+      sku_sort = #skuSort:INTEGER#,
+      sku_name = #skuName:VARCHAR#,
+      market_price = #marketPrice:REAL#,
+      create_time = #createTime:TIMESTAMP#,
+      update_time = #updateTime:TIMESTAMP#,
+      create_user_id = #createUserId:VARCHAR#,
+      update_user_id = #updateUserId:VARCHAR#,
+      sku_status = #skuStatus:BIT#,
+      sku_type = #skuType:BIT#,
+      sales = #sales:BIGINT#
+    where id = #id:BIGINT#
+  </update>
+</sqlMap>
