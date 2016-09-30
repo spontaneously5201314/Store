@@ -10,6 +10,7 @@
     String basePath = request.getContextPath();
 %>
 <html>
+<script type="text/javascript" src="../js/jquery-1.12.3.min.js"/>
 <head>
     <title>登录</title>
     <script>
@@ -19,7 +20,7 @@
     </script>
 </head>
 <body>
-<form id="login" action="${pageContext.request.contextPath}/login/listUsers.do" method="post">
+<form id="login" action="${pageContext.request.contextPath}/login/register.do" method="post">
     <table id="usermessage" border="1">
         <tr>
             <td>用户名：</td>

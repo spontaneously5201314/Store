@@ -18,9 +18,15 @@ public class BuyerController {
     private BuyerService buyerService;
 
 
+    @RequestMapping(value = "/login")
+    public String login(){
+//        System.out.println("调用");
+//        return "register";
+        return "success";
+    }
+
     @RequestMapping("/listBuyerMessage")
     public String listBuyerMessage(@RequestParam String username, @RequestParam String password){
-
         return "buyer/listBuyerMessage";
     }
 

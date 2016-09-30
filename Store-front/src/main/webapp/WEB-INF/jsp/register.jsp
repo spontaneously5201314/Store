@@ -9,10 +9,10 @@
 <%
     String basePath = request.getContextPath();
 %>
+<script type="text/javascript" src="/WEB-INF/js/jquery-1.12.3.min.js"/>
 <html>
 <head>
     <title>注册</title>
-    <script type="text/javascript" src="/WEB-INF/js/jquery-1.12.3.min.js"/>
 </head>
 <body>
     <form action="${basePath}/buyer/registerBuyer.do" method="post">
